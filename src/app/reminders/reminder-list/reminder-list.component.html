@@ -1,0 +1,15 @@
+<mat-accordion multi="true" *ngIf="reminders.length > 0">
+  <mat-expansion-panel *ngFor="let reminder of reminders">
+    <mat-expansion-panel-header>
+      {{ reminder.title }}
+    </mat-expansion-panel-header>
+    <p>{{ reminder.content }}</p>
+    <mat-action-row>
+      <button mat-button color="primary">EDIT</button>
+      <button mat-button color="warn">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="reminders.length <= 0">
+  No reminders added yet!
+</p>

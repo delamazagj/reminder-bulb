@@ -9,16 +9,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { AppComponent } from './app.component';
-import { PostCreateComponent } from './posts/post-create/post-create.component';
+import { ReminderCreateComponent } from './reminders/reminder-create/reminder-create.component';
 import { HeaderComponent } from './header/header.component';
-import { PostListComponent } from './posts/post-list/post-list.component';
+import { ReminderListComponent } from './reminders/reminder-list/reminder-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostCreateComponent,
+    ReminderCreateComponent,
     HeaderComponent,
-    PostListComponent
+    ReminderListComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,4 @@
-export interface Post {
+export interface Reminder {
   title: string;
   content: string;
 }
