@@ -1,11 +1,11 @@
 <mat-card>
-  <form (submit)="onAddReminder(reminderForm)" #reminderForm="ngForm">
+  <form (submit)="onSaveReminder(reminderForm)" #reminderForm="ngForm">
     <mat-form-field>
       <input
         matInput
         type="text"
         name="title"
-        ngModel
+        [ngModel]="reminder.title"
         required
         minlength="3"
         placeholder="Reminder Title"
@@ -20,7 +20,7 @@
         matInput
         rows="4"
         name="content"
-        ngModel
+        [ngModel]="reminder.content"
         required
         placeholder="Reminder Content"
         #content="ngModel"

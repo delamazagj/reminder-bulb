@@ -13,7 +13,7 @@ export class RemindersService {
 
   getReminders() {
     this.http
-      .get<{ message: String; reminders: any }>(this.REMINDERS_LIST_URL)
+      .get<{ message: string; reminders: any }>(this.REMINDERS_LIST_URL)
       .pipe(
         map(savedRem => {
           return savedRem.reminders.map((rem: any) => {
@@ -31,12 +31,16 @@ export class RemindersService {
       });
   }
 
+  getReminder(id: string) {
+    return { ...this.reminders.find(r => r.id === id) };
+  }
+
   getReminderUpdateListener() {
     return this.remindersUpdated.asObservable();
   }
 
-  addReminder(title: string, content: string) {
-    const reminder: Reminder = { id: '', title: title, content: content };
+  addReminder(id: string, title: string, content: string) {
+    const reminder: Reminder = { id: id, title: title, content: content };
     this.http
       .post<{ message: string; id: string }>(this.REMINDERS_LIST_URL, reminder)
       .subscribe(res => {
@@ -44,6 +48,17 @@ export class RemindersService {
         reminder.id = res.id;
         this.reminders.push(reminder);
         this.remindersUpdated.next([...this.reminders]);
+      });
+  }
+
+  updateReminder(id: string, title: string, content: string) {
+    this.http
+      .put<{ message: string; id: string }>(
+        this.REMINDERS_LIST_URL + '/' + id,
+        { title: title, content: content }
+      )
+      .subscribe(res => {
+        console.log('Updated:', res.id);
       });
   }
 

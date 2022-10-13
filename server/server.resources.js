@@ -5,7 +5,8 @@ const serverResources = {
   v1: {
     getReminders: getReminders,
     postReminder: postReminder,
-    deleteReminder: deleteReminder
+    deleteReminder: deleteReminder,
+    updateReminder: updateReminder
   }
 };
 
@@ -39,6 +40,20 @@ async function deleteReminder(req, res, next) {
   console.log(req.params.id);
   res.status(200).json({
     message: 'Reminder Deleted!'
+  });
+}
+
+async function updateReminder(req, res, next) {
+  const reminder = new Reminder({
+    _id: req.params.id,
+    title: req.body.title,
+    content: req.body.content
+  });
+  await Reminder.updateOne({ _id: req.params.id }, reminder);
+  console.log(req.params.id);
+  res.status(200).json({
+    message: 'Reminder Updated!',
+    id: req.params.id
   });
 }
 

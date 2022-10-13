@@ -5,7 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', component: ReminderListComponent },
-  { path: 'create', component: ReminderCreateComponent }
+  { path: 'create', component: ReminderCreateComponent },
+  { path: 'edit/:id', component: ReminderCreateComponent }
 ];
 
 @NgModule({

@@ -1,23 +1,74 @@
+import { Reminder } from './../../model/reminder.model';
 import { RemindersService } from './../reminder.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reminder-create',
   templateUrl: './reminder-create.component.html',
   styleUrls: ['./reminder-create.component.scss']
 })
-export class ReminderCreateComponent {
+export class ReminderCreateComponent implements OnInit {
   enteredTitle = '';
   enteredContent = '';
+  id!: string;
+  reminder!: Reminder;
 
-  constructor(public remindersService: RemindersService) {}
+  constructor(
+    private remindersService: RemindersService,
+    private router: ActivatedRoute
+  ) {
+    this.reminder = {
+      id: '',
+      title: '',
+      content: ''
+    };
+  }
 
-  onAddReminder(form: NgForm) {
+  ngOnInit() {
+    this.router.paramMap.subscribe(params => {
+      this.id = params.has('id') ? (params.get('id') as string) : '';
+      if (this.id) {
+        const searchReminder = this.remindersService.getReminder(this.id);
+        this.reminder = searchReminder as Reminder;
+      }
+      console.log(this.reminder);
+    });
+  }
+
+  onUpdateReminder(form: NgForm) {
     if (form.invalid) {
       return;
     }
-    this.remindersService.addReminder(form.value.title, form.value.content);
+    this.remindersService.updateReminder(
+      this.reminder.id,
+      form.value.title,
+      form.value.content
+    );
+    form.resetForm();
+  }
+
+  onSaveReminder(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    console.log(this.id);
+    if (!this.id) {
+      console.log('Saving normally');
+      this.remindersService.addReminder(
+        this.reminder.id,
+        form.value.title,
+        form.value.content
+      );
+    } else {
+      console.log('Updating normally');
+      this.remindersService.updateReminder(
+        this.reminder.id,
+        form.value.title,
+        form.value.content
+      );
+    }
     form.resetForm();
   }
 }

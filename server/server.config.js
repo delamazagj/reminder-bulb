@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   );
   res.setHeader(
     'Access-Control-Allow-Methods',
-    'GET, POST, PATCH, DELETE, OPTIONS'
+    'GET, POST, PUT, PATCH, DELETE, OPTIONS'
   );
   next();
 });
@@ -41,6 +41,11 @@ app.post(
 app.delete(
   serverConstants.v1 + serverConstants.REMINDERS_LIST_URL + '/:id',
   serverResources.v1.deleteReminder
+);
+
+app.put(
+  serverConstants.v1 + serverConstants.REMINDERS_LIST_URL + '/:id',
+  serverResources.v1.updateReminder
 );
 
 module.exports = app;
