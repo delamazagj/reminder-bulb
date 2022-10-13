@@ -6,7 +6,8 @@ const serverResources = {
     getReminders: getReminders,
     postReminder: postReminder,
     deleteReminder: deleteReminder,
-    updateReminder: updateReminder
+    updateReminder: updateReminder,
+    getReminder: getReminder
   }
 };
 
@@ -20,6 +21,30 @@ async function getReminders(req, res, next) {
     message: 'Reminders successfully fetched!',
     reminders: reminders
   });
+}
+
+async function getReminder(req, res, next) {
+  console.log('Fetching the Reminder');
+
+  const reminder = await Reminder.findById(req.params.id).catch(err => {
+    console.log(err.message);
+  });
+
+  if (reminder) {
+    res.status(200).json({
+      message: 'Reminder successfully fetched!',
+      reminder: {
+        id: reminder._id,
+        title: reminder.title,
+        content: reminder.content
+      }
+    });
+  } else {
+    res.status(404).json({
+      message: 'Reminder Not Found!',
+      reminder: { id: '', title: '', content: '' }
+    });
+  }
 }
 
 async function postReminder(req, res, next) {

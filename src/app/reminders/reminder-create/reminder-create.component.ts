@@ -30,10 +30,11 @@ export class ReminderCreateComponent implements OnInit {
     this.router.paramMap.subscribe(params => {
       this.id = params.has('id') ? (params.get('id') as string) : '';
       if (this.id) {
-        const searchReminder = this.remindersService.getReminder(this.id);
-        this.reminder = searchReminder as Reminder;
+        this.remindersService.getReminder(this.id).subscribe(res => {
+          this.reminder = res.reminder;
+          console.log(this.reminder);
+        });
       }
-      console.log(this.reminder);
     });
   }
 

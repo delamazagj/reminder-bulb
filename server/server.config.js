@@ -48,4 +48,9 @@ app.put(
   serverResources.v1.updateReminder
 );
 
+app.get(
+  serverConstants.v1 + serverConstants.REMINDERS_LIST_URL + '/:id',
+  serverResources.v1.getReminder
+);
+
 module.exports = app;

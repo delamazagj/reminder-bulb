@@ -32,7 +32,9 @@ export class RemindersService {
   }
 
   getReminder(id: string) {
-    return { ...this.reminders.find(r => r.id === id) };
+    return this.http.get<{ message: string; reminder: Reminder }>(
+      this.REMINDERS_LIST_URL + '/' + id
+    );
   }
 
   getReminderUpdateListener() {
