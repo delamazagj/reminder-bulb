@@ -6,7 +6,7 @@ import { RemindersService } from '../reminder.service';
 @Component({
   selector: 'app-reminders-list',
   templateUrl: './reminder-list.component.html',
-  styleUrls: ['./reminder-list.component.css']
+  styleUrls: ['./reminder-list.component.scss']
 })
 export class ReminderListComponent implements OnInit, OnDestroy {
   reminders: Reminder[] = [];
@@ -15,12 +15,16 @@ export class ReminderListComponent implements OnInit, OnDestroy {
   constructor(public remindersService: RemindersService) {}
 
   ngOnInit() {
-    this.reminders = this.remindersService.getReminders();
+    this.remindersService.getReminders();
     this.remindersSub = this.remindersService
       .getReminderUpdateListener()
       .subscribe((reminders: Reminder[]) => {
         this.reminders = reminders;
       });
+  }
+
+  onDeleteReminder(id: string) {
+    this.remindersService.deleteReminder(id);
   }
 
   ngOnDestroy() {

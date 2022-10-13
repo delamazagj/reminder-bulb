@@ -5,7 +5,7 @@ import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-reminder-create',
   templateUrl: './reminder-create.component.html',
-  styleUrls: ['./reminder-create.component.css']
+  styleUrls: ['./reminder-create.component.scss']
 })
 export class ReminderCreateComponent {
   enteredTitle = '';
