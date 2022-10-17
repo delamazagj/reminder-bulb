@@ -1,7 +1,6 @@
-const serverConstants = require('./server.constants');
-const Reminder = require('./models/reminder');
+const Reminder = require('./../../models/reminder');
 
-const serverResources = {
+const reminderResources = {
   v1: {
     getReminders: getReminders,
     postReminder: postReminder,
@@ -82,4 +81,4 @@ async function updateReminder(req, res, next) {
   });
 }
 
-module.exports = serverResources;
+module.exports = reminderResources;

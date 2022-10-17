@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const serverConstants = require('./server.constants');
-const serverResources = require('./server.resources');
-
 const app = express();
+const reminderResources = require('./resources/reminder/reminder.routes');
+const serverConstants = require('./server.constants');
 
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -28,29 +27,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get(
+app.use(
   serverConstants.v1 + serverConstants.REMINDERS_LIST_URL,
-  serverResources.v1.getReminders
-);
-
-app.post(
-  serverConstants.v1 + serverConstants.REMINDERS_LIST_URL,
-  serverResources.v1.postReminder
-);
-
-app.delete(
-  serverConstants.v1 + serverConstants.REMINDERS_LIST_URL + '/:id',
-  serverResources.v1.deleteReminder
-);
-
-app.put(
-  serverConstants.v1 + serverConstants.REMINDERS_LIST_URL + '/:id',
-  serverResources.v1.updateReminder
-);
-
-app.get(
-  serverConstants.v1 + serverConstants.REMINDERS_LIST_URL + '/:id',
-  serverResources.v1.getReminder
+  reminderResources
 );
 
 module.exports = app;
