@@ -3,13 +3,14 @@ import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class RemindersService {
   private reminders: Reminder[] = [];
   private remindersUpdated = new Subject<Reminder[]>();
   private REMINDERS_LIST_URL = 'http://localhost:3000/api/v1/reminders';
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   getReminders() {
     this.http
@@ -50,6 +51,7 @@ export class RemindersService {
         reminder.id = res.id;
         this.reminders.push(reminder);
         this.remindersUpdated.next([...this.reminders]);
+        this.router.navigate(['/']);
       });
   }
 
@@ -61,6 +63,7 @@ export class RemindersService {
       )
       .subscribe(res => {
         console.log('Updated:', res.id);
+        this.router.navigate(['/']);
       });
   }
 

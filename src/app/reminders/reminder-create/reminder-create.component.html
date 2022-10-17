@@ -1,5 +1,10 @@
 <mat-card>
-  <form (submit)="onSaveReminder(reminderForm)" #reminderForm="ngForm">
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form
+    (submit)="onSaveReminder(reminderForm)"
+    #reminderForm="ngForm"
+    *ngIf="!isLoading"
+  >
     <mat-form-field>
       <input
         matInput

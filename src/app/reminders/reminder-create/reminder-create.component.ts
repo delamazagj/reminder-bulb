@@ -14,10 +14,11 @@ export class ReminderCreateComponent implements OnInit {
   enteredContent = '';
   id!: string;
   reminder!: Reminder;
+  isLoading = false;
 
   constructor(
     private remindersService: RemindersService,
-    private router: ActivatedRoute
+    private route: ActivatedRoute
   ) {
     this.reminder = {
       id: '',
@@ -27,12 +28,14 @@ export class ReminderCreateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.router.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe(params => {
       this.id = params.has('id') ? (params.get('id') as string) : '';
       if (this.id) {
+        this.isLoading = true;
         this.remindersService.getReminder(this.id).subscribe(res => {
           this.reminder = res.reminder;
           console.log(this.reminder);
+          this.isLoading = false;
         });
       }
     });
@@ -54,6 +57,7 @@ export class ReminderCreateComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    this.isLoading = true;
     console.log(this.id);
     if (!this.id) {
       console.log('Saving normally');

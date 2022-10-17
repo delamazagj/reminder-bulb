@@ -1,4 +1,5 @@
-<mat-accordion multi="true" *ngIf="reminders.length > 0">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="reminders.length > 0 && !isLoading">
   <mat-expansion-panel *ngFor="let reminder of reminders">
     <mat-expansion-panel-header>
       {{ reminder.title }}
@@ -14,6 +15,6 @@
     </mat-action-row>
   </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text mat-body-1" *ngIf="reminders.length <= 0">
+<p class="info-text mat-body-1" *ngIf="reminders.length <= 0 && !isLoading">
   No reminders added yet!
 </p>

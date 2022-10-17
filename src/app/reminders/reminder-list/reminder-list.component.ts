@@ -10,15 +10,18 @@ import { RemindersService } from '../reminder.service';
 })
 export class ReminderListComponent implements OnInit, OnDestroy {
   reminders: Reminder[] = [];
+  isLoading = false;
   private remindersSub!: Subscription;
 
   constructor(public remindersService: RemindersService) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.remindersService.getReminders();
     this.remindersSub = this.remindersService
       .getReminderUpdateListener()
       .subscribe((reminders: Reminder[]) => {
+        this.isLoading = false;
         this.reminders = reminders;
       });
   }
