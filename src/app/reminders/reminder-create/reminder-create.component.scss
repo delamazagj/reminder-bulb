@@ -7,3 +7,31 @@ mat-spinner {
 
   margin: auto;
 }
+
+
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-end;
+  align-items: center;
+
+  .image-preview {
+    height: 5rem;
+    margin: 1rem auto;
+    margin-right: 1rem;
+  
+    img {
+      height: 100%;
+    }
+  }
+
+  .image-picker {
+    visibility: hidden;
+    width: 0;
+  }
+}
+
+

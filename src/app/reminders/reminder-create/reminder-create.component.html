@@ -1,41 +1,64 @@
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
-  <form
-    (submit)="onSaveReminder(reminderForm)"
-    #reminderForm="ngForm"
-    *ngIf="!isLoading"
-  >
+  <form [formGroup]="form" (submit)="onSaveReminder()" *ngIf="!isLoading">
     <mat-form-field>
       <input
         matInput
+        formControlName="title"
         type="text"
         name="title"
-        [ngModel]="reminder.title"
-        required
-        minlength="3"
         placeholder="Reminder Title"
-        #title="ngModel"
       />
-      <mat-error *ngIf="title.invalid"
+      <mat-error *ngIf="form.get('title')?.invalid"
         >Please enter a Reminder title.</mat-error
       >
     </mat-form-field>
+    <div class="buttonContainer">
+      <div
+        class="image-preview"
+        *ngIf="
+          imagePreviewUrl !== '' && imagePreviewUrl && form.get('image')?.valid
+        "
+      >
+        <img [src]="imagePreviewUrl" [alt]="form.value.title" />
+      </div>
+      <input
+        class="image-picker"
+        type="file"
+        #imagePicker
+        (change)="onImageChanged($event)"
+      />
+      <button
+        mat-stroked-button
+        color="accent"
+        type="button"
+        (click)="imagePicker.click()"
+      >
+        Choose Image
+      </button>
+    </div>
+
     <mat-form-field>
       <textarea
         matInput
+        formControlName="content"
         rows="4"
         name="content"
-        [ngModel]="reminder.content"
-        required
         placeholder="Reminder Content"
-        #content="ngModel"
       ></textarea>
-      <mat-error *ngIf="content.invalid"
+      <mat-error *ngIf="form.get('content')?.invalid"
         >Please enter a Reminder title.</mat-error
       >
     </mat-form-field>
-    <button mat-raised-button color="accent" type="submit">
-      Save Reminder
-    </button>
+    <div class="buttonContainer">
+      <button
+        class="buttonContainer"
+        mat-raised-button
+        color="accent"
+        type="submit"
+      >
+        Save Reminder
+      </button>
+    </div>
   </form>
 </mat-card>
