@@ -52,7 +52,8 @@ export class ReminderCreateComponent implements OnInit {
           this.reminder = res.reminder;
           this.form.setValue({
             title: this.reminder.title,
-            content: this.reminder.content
+            content: this.reminder.content,
+            image: null
           });
           console.log(this.reminder);
           this.isLoading = false;

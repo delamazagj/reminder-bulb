@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class RemindersService {
   private reminders: Reminder[] = [];
   private remindersUpdated = new Subject<Reminder[]>();
-  private REMINDERS_LIST_URL = 'http://localhost:3000/api/v1/reminders';
+  private REMINDERS_LIST_URL = '/api/v1/reminders';
   constructor(private http: HttpClient, private router: Router) {}
 
   getReminders() {
