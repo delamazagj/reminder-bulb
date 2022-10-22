@@ -3,3 +3,6 @@ node_modules
 .vscode
 .env
 .DS_Store
+nodemon.json
+server/app
+server/reminder-bulb.zip
