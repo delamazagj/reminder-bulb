@@ -1,14 +1,36 @@
 # ReminderBulb
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.2.
+Reminder Bulb is an application for creating _TO-DO_ tasks.  
+This is a sample project using the MEAN stack. It can server as a schematics for scaffolding other type of applications that require the same techstach and similar functionalities.
 
-## Development server
+## Tech Stack:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Angular
+- NodeJS
+- Typescript
+- Express
+- MongoDB
+- AWS EB
+- Git
 
-## Code scaffolding
+## Development Server
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `npm run start:server:dev` for a dev server. Navigate to `http://localhost:3000/`. The app will automatically reload if you change any of the source files.
+
+## Configuration
+
+The server connects to MongoDb to persist data. In order to run the application correctly, ensure you have your MongoDb environment working and the connection URL for the same. This should be added to [server/server.config.js **_line 11_**](https://github.com/delamazagj/reminder-bulb/blob/ddfcf2229f4f5bbdbae0de5342128d0edcfa849a/server/server.config.js#L11), replacing the current assignment for the variable DB_URL with your own DB URL for conecting to MongoDB
+
+## Sample Deployment
+
+The sample for this app is hosted in AWS EB and can be accessed [here](http://reminderbulb-env.eba-wbjzbauz.us-east-1.elasticbeanstalk.com/)
+
+## Future Enhancements
+
+- Pagination
+- Authentication
+- Authorization
+- Quick Search
 
 ## Build
 
